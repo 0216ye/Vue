@@ -13,8 +13,9 @@
     * beforeMount()
     * mounted()
   2). 更新状态
-    * beforeUpdate()
-    * updated()
+    * beforeUpdate() ->读的是老的界面的数据，更新指的是界面的更新，界面更新前调用
+    * updated() ->读的是新的界面的数据,界面更新后调用
+    以上二者都在数据更新后调用，
   3). 销毁vue实例: vm.$destory()
     * beforeDestory()
     * destoryed()

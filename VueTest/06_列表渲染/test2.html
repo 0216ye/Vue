@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>06_列表渲染_过滤与排序</title>
 </head>
+
 <body>
-<!--
+  <!--
 1. 列表过滤
 2. 列表排序
 -->
 
-<div id="demo">
+  <!--
+  <div id="demo">
   <input type="text" v-model="searchName">
   <ul>
     <li v-for="(p, index) in filterPersons" :key="index">
@@ -23,9 +26,9 @@
     <button @click="setOrderType(0)">原本顺序</button>
   </div>
 </div>
+-->
 
-<script type="text/javascript" src="../js/vue.js"></script>
-<script type="text/javascript">
+  <!--<script type="text/javascript">
   new Vue({
     el: '#demo',
     data: {
@@ -70,6 +73,57 @@
       }
     }
   })
-</script>
+</script>-->
+
+  <div id='app'>
+    <input type="text" v-model="searchName" >
+    <ul>
+      <li v-for="(p, index) in filterSearch" :key="p.id">
+        {{p.id}} -- {{p.name}} -- {{p.age}} 
+      </li>
+    </ul>
+    <button @click = 'searchType=3'>升序</button>
+    <button @click = 'searchType=2'> 降序</button>
+    <button @click = 'searchType=1'>原来顺序</button>
+  </div>
+
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: '#app',
+      data: {
+        searchType:1, //排序的类型: 1为原本顺序，2为降序，3为升序
+        searchName:'',//保存输入框的内容
+        persons: [
+          { id: 1, name: '叶', age: 20 },
+          { id: 2, name: '也', age: 21 },
+          { id: 3, name: '耶', age: 22 },
+          { id: 4, name: '页', age: 23 }
+        ]
+      },
+      computed: { //使用计算属性，动态的展示输入框的内容
+        filterSearch(){
+          const {searchType,persons,searchName} = this
+          //filter会将当前元素的值作为参数,indexOf的参数如果为: '',则返回0，如果找不到则返回-1,找到则返回index
+          const arr =  persons.filter(p => p.name.indexOf(searchName) >=0) 
+          if(searchType){
+            if(searchType ===2){
+              //降序  --> p2大于p1
+              arr.sort((p1,p2)=> p2.age-p1.age)
+           
+              return arr
+            }else  if(searchType ===3){
+              //升序
+              arr.sort((p1,p2)=> p1.age-p2.age)
+              return arr
+            }
+            return arr 
+          } 
+          
+        }
+      },
+    })
+  </script>
 </body>
+
 </html>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>02_模板语法</title>
 </head>
+
 <body>
-<!--
+  <!--
 1. 模板的理解:
   动态的html页面
   包含了一些JS语法代码
@@ -29,7 +31,9 @@
     @click='xxx'
 -->
 
-<div id="app">
+  <!-- 
+
+  <div id="app">
   <h2>1. 双大括号表达式</h2>
   <p>{{content}}</p>
   <p>{{content.toUpperCase()}}</p>
@@ -61,5 +65,35 @@
     }
   })
 </script>
+-->
+  <div id="app">
+    <h2>1. 双大括号表达式</h2>
+      <p>{{connet}}</p>
+      <p>{{connet.toUpperCase()}}</p>
+    <h2>2. 指令一: 强制数据绑定</h2>
+      <a href="url">地那就</a> 
+      <a v-bind:href="url" >点击</a> 
+      <a :href="url">蒂娜j</a>
+    <h2>3. 指令二: 绑定事件监听</h2>
+      <button v-on:click="demo"></button>
+      <button @click = 'demo'>你好是</button>
+  </div>  
+  <script src="../js//vue.js" s></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        connet:'你hao',
+        url : 'www.baidu.com'
+      },
+      methods: {
+        demo(event){
+          alert('鸟')
+          console.log(event.target.innerHTML)
+        }
+      },
+    })
+  </script>
 </body>
+
 </html>

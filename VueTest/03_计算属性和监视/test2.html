@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        const p = {
+            firstName: 'Ye',
+            lastName: 'Jie'
+        }
+
+        // 参数一:obj
+        // 要定义属性的对象。
+        // 参数二:prop
+        // 要定义或修改的属性的名称或 Symbol 。
+        // 参数三:descriptor
+        // 要定义或修改的属性描述符。
+        Object.defineProperty(p, 'fullName', { //匹配对象-->属性描述符
+
+            get() {
+                //当访问参数一-->P的(fullName)属性时，该函数会被自动调用，该函数的返回值会被用作属性的值
+                return this.firstName + '-' + this.lastName
+            },
+            set(value) {//value为该属性的最新的值
+            //当属性值被修改时，会调用此函数。该方法接受一个参数（也就是被赋予的新值），会传入赋值时的 this 对象。
+                let name = value.split('-')
+                this.firstName = name[0]
+                this.lastName = name[1]
+            }
+        })
+
+        console.log(p.firstName, p.lastName)//Ye Jie
+        console.log(p.fullName)//Ye-Jie
+        console.log(p.fullName = 'YEYONGJIE')//YEYONGJIE
+        console.log(p.fullName)//YEYONGJIE-undefined
+    </script>
+</body>
+
+</html>

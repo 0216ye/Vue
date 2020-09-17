@@ -13,19 +13,25 @@
 2. 列表的更新显示
   删除item
   替换item
+
+
+  重点:Vue的数据绑定实现:
+          1:Vue会监视data中的所有层次的属性!->不管嵌套了多少次,只要的data中的就会监视
+          2:data中的对象属性数据通过set方法来实现监听
+          3:data中的数组属性数据也实现了监听:Vue底层重写了数组一系列更新元素的方法
+            1):调用原生对应的方法去更新数组元素
+            2):更新界面
 -->
 
 <div id="demo">
   <h2>测试: v-for 遍历数组</h2>
-  <ul>
-    <li v-for="(p, index) in persons" :key="index">
-      {{index}}--{{p.name}}--{{p.age}}
-      --<button @click="deleteP(index)">删除</button>
-      --<button @click="updateP(index, {name:'Cat', age: 16})">更新</button>
-    </li>
-  </ul>
-  <button @click="addP({name: 'xfzhang', age: 18})">添加</button>
-
+    <ul>
+      <li v-for="(p, index) in persons" :key="index" >
+        {{p.id}} -- {{p.name}} -- {{p.age}} 
+        <button @click = 'deleteP(index)'>删除</button>
+        <button @click ='updateP(index,{id:Date.now(),name:"你",age:20})'>更新</button>
+      </li>
+    </ul>
   <h2>测试: v-for 遍历对象</h2>
 
   <ul>
@@ -36,6 +42,27 @@
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el : '#demo',
+    data:{
+      persons:[
+        {id:1,name:'叶',age:20},
+        {id:2,name:'永',age:21},
+        {id:3,name:'耶',age:22},
+        {id:4,name:'勇',age:23}
+      ]
+    },
+    methods: {
+      deleteP(index){
+        this.persons.splice(index,1)
+      },
+      updateP(index,newP) {
+        this.persons.splice(index,1,newP)
+        // this.persons[index] = newP 使用这种不会更新界面，因为数组是通过重写方法来实现监听的
+      },
+    },
+  })
+/*
   new Vue({
     el: '#demo',
     data: {
@@ -66,6 +93,7 @@
       }
     }
   })
+  */
 </script>
 </body>
 </html>

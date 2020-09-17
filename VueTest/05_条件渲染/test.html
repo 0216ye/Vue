@@ -15,23 +15,37 @@
 -->
 
 <div id="demo">
-  <p v-if="ok">表白成功</p>
-  <p v-else>表白失败</p>
+  <h1 v-if="ok">你爱我</h1>
+  <h2 v-else>你不爱我</h2>
+  <p v-show="show">隐藏</p>
+  <p v-show="!show">显示</p>
 
-  <hr>
-  <p v-show="ok">求婚成功</p>
-  <p v-show="!ok">求婚失败</p>
-
-  <button @click="ok=!ok">切换</button>
+  <button @click = 'update'>更新</button>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
+
   new Vue({
     el: '#demo',
     data: {
       ok: true,
     }
+  })
+</script> -->
+<script type="text/javascript">
+  new Vue({
+    el:'#demo',
+    data:{
+      ok:true,
+      show:true
+    },
+    methods: {
+      update(){
+        this.ok = !this.ok
+        this.show = !this.show
+      }
+    },
   })
 </script>
 </body>

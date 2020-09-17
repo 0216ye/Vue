@@ -23,57 +23,87 @@
 <div id="example">
 
   <h2>1. 绑定监听</h2>
-  <button @click="test1">test1</button>
-  <button @click="test2('abc')">test2</button>
-  <button @click="test3('abcd', $event)">test3</button>
+  <button v-on:click="test1">原生</button>
+  <button @click="test2('asd')">简写</button>
+  <button @click="test3('asd',$event)">带参数</button>
 
   <h2>2. 事件修饰符</h2>
-  <a href="http://www.baidu.com" @click.prevent="test4">百度一下</a>
-  <div style="width: 200px;height: 200px;background: red" @click="test5">
-    <div style="width: 100px;height: 100px;background: blue" @click.stop="test6"></div>
+  <div style="width: 200px;height: 200px;background-color: aliceblue;" @click = 'test4'>
+    <div style="width: 100px;height: 100px;background-color:red" @click.stop = 'test5'></div>
   </div>
 
+  <a href="http://www.baidu.com" @click.prevent = 'test6'>点击跳转</a>
   <h2>3. 按键修饰符</h2>
-  <input type="text" @keyup.13="test7">
-  <input type="text" @keyup.enter="test7">
+    <input type="text" v-model="msg" @keyup.enter= 'test7'>
 
 </div>
 
-<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/vue.js">
+  // new Vue({
+  //   el: '#example',
+  //   data: {
+
+  //   },
+  //   methods: {
+  //     test1(event) {
+  //       alert(event.target.innerHTML)
+  //     },
+  //     test2 (msg) {
+  //       alert(msg)
+  //     },
+  //     test3 (msg, event) {
+  //       alert(msg+'---'+event.target.textContent)
+  //     },
+
+  //     test4 () {
+  //       alert('点击了链接')
+  //     },
+
+  //     test5 () {
+  //       alert('out')
+  //     },
+  //     test6 () {
+  //       alert('inner')
+  //     },
+
+  //     test7 (event) {
+  //       console.log(event.keyCode)
+  //       alert(event.target.value)
+  //     }
+  //   }
+  // })
+</script>
 <script type="text/javascript">
-  new Vue({
-    el: '#example',
-    data: {
 
-    },
-    methods: {
-      test1(event) {
-        alert(event.target.innerHTML)
+    new Vue({
+      el:'#example',
+      data:{
+        msg:''//保存输入框输入的信息
       },
-      test2 (msg) {
-        alert(msg)
-      },
-      test3 (msg, event) {
-        alert(msg+'---'+event.target.textContent)
-      },
-
-      test4 () {
-        alert('点击了链接')
-      },
-
-      test5 () {
-        alert('out')
-      },
-      test6 () {
-        alert('inner')
-      },
-
-      test7 (event) {
-        console.log(event.keyCode)
-        alert(event.target.value)
+      methods:{
+        test1(event){
+          alert(event.target.innerHTML)
+        },
+        test2(msg){
+          alert(msg)
+        },
+        test3(msg,event){
+          alert(msg+"--"+event)
+        },
+        test4(){
+          alert('out')
+        },
+        test5(){
+          alert('inner')
+        },
+        test6(){
+          alert('跳转')
+        },
+        test7(){
+          alert(this.msg)
+        }
       }
-    }
-  })
+    })
 </script>
 </body>
 </html>

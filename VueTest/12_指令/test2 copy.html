@@ -33,28 +33,41 @@
   <p v-lower-text="msg"></p>
 </div>
 
+<div id="test2">
+  <p v-upper-text="msg"></p>
+  <p v-lower-text="msg"></p>
+</div>
+
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
   // 注册一个全局指令
   // el: 指令所在的标签对象
   // binding: 包含指令相关数据的容器对象
-  Vue.directive('upper-text',function(el,binding){
-    el.innerText = binding.value.toUpperCase()
+  Vue.directive('upper-text', function (el, binding) {
+    console.log(el, binding)
+    el.textContent = binding.value.toUpperCase()
   })
   new Vue({
-    el:'#test',
-    data:{
-      msg:'I Is Sa'
+    el: '#test',
+    data: {
+      msg: "I Like You"
     },
-    //局部自定义指令
-    directives:{
-      'lower-text'(el,binding) {
-         el.innerText = binding.value.toLowerCase()
+    // 注册局部指令
+    directives: {
+      'lower-text'(el, binding) {
+        console.log(el, binding)
+        el.textContent = binding.value.toLowerCase()
       }
     }
+
   })
 
+  new Vue({
+    el: '#test2',
+    data: {
+      msg: "I Like You Too"
+    }
+  })
 </script>
 </body>
 </html>
