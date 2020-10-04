@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义全局事件总线</title>
+</head>
+<body>
+    <script src="./globalEventBus.js"></script>
+    <script>
+        /*
+        1. on(eventName,callback):绑定事件
+        2. emit(eventName,data):分发一个指定的事件
+        3. off (eventName):移除指定的事件
+        */
+        globalEventBus.on('add',(data) => {
+            console.log('add()',data)
+        })
+        globalEventBus.on('add',(data) => {
+            console.log('add2()',data)
+        })
+        globalEventBus.on('c',(data) => {
+            console.log('c()',data)
+        })
+        globalEventBus.on('delete',(data) => {
+            console.log('delete()',data)
+        })
+        console.log('emit之前')
+        globalEventBus.off('c')
+      
+        globalEventBus.emit('add','你好')
+        globalEventBus.emit('c','你好C')
+        globalEventBus.emit('delete','你不好')
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义PubSub</title>
+</head>
+
+<body>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/pubsub-js/1.0/pubsub.js"></script> -->
+    <script src="./PubSub.js"></script>
+    <script>
+        /*
+         var token = PubSub.subscribe('MY TOPIC', mySubscriber):消息订阅返回一个token标识
+        PubSub.subscribe('MY TOPIC', mySubscriber):消息订阅,绑定监听
+        PubSub.publish('MY TOPIC', 'hello world!'):消息发布异步执行
+        PubSub.publishSync('MY TOPIC', 'hello world!'):消息发布同步执行
+        PubSub.unsubscribe(token):删除指定token/事件名/的绑定
+        */
+        let token = PubSub.subscribe('add', (msg, data) => {
+            console.log('add()', data)
+        })
+        let token1 = PubSub.subscribe('add', (msg, data) => {
+            console.log('add2()', data)
+        })
+        PubSub.subscribe('delete', (msg, data) => {
+            console.log('delete()', data)
+        })
+        // PubSub.unsubscribe('add')
+        PubSub.publish('add','你好')
+        PubSub.publish('delete','你不好')
+        console.log(token,token1)
+
+        // PubSub.publishSync('add', '你好')
+        // PubSub.publishSync('delete', '你不好')
+        console.log('消息发布之后')
+    </script>
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 (function (window) {
   const MyPlugin = {}
+  //自定义的组件中必须要有一个install方法
   MyPlugin.install = function (Vue, options) {
     // 1. 添加全局方法或属性
     Vue.myGlobalMethod = function () {
